@@ -1,0 +1,17 @@
+<form [formGroup]="form">
+  <div class="col-sm-12">
+  <div *ngFor="let question of questions">
+    <div class="col-sm-4">
+      <app-question [question]="question" [form]="form"></app-question>
+    </div>
+  </div>
+
+ 
+</div>
+<!-- <button type="submit" (click)="submit()" class="btn btn-md btn-success" [disabled]="!form.valid">Save</button> -->
+<button type="submit" (click)="submit()" (notImplemented)="notImplemented()" class="btn btn-md btn-success" [disabled]="!form.valid" 
+[data-not-implemented]="type"
+
+>Save</button>
+
+</form>

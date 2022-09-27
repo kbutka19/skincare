@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~bootstrap/dist/css/bootstrap.css";
 
 html, body {
   font-family: 'Roboto', sans-serif;
@@ -8,4 +9,21 @@ html, body {
 
 body {
   margin: 0;
+}
+
+bg-success{
+  background-color: green;
+}
+bg-warning{
+  background-color: yellow;
+}
+
+
+.mat-radio-button {
+    margin-right: 15px;
+
+}
+
+.zoomIn{
+  transform: scale(1.05);
 }

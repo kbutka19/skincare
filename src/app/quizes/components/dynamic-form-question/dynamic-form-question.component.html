@@ -1,0 +1,37 @@
+<form
+  fxLayoutGap="20px"
+  [formGroup]="form"
+>
+<div [ngSwitch]="question.controlType">
+    <mat-form-field *ngSwitchCase="'textbox'" class="mb-2">
+      <mat-label> {{ question.label }}</mat-label>
+      <input 
+        [type]="question.type"
+        matInput
+        formControlName="{{ question.key }}"
+      />
+      <mat-error *ngIf="form.controls[question.key]?.errors?.required">{{question.label}} is required</mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field *ngSwitchCase="'dropdown'" class="mb-2">
+      <mat-label> {{ question.label }}</mat-label>
+      <mat-select  formControlName="{{ question.key }}">
+        <mat-option *ngFor="let opt of question.options" [value]="opt.key" class="mr-3">
+          {{opt.value}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.controls[question.key]?.errors?.required">{{question.label}} is required</mat-error>
+    </mat-form-field>
+
+    <div *ngSwitchCase="'radiobutton'" class="mb-3"> 
+      <mat-label> {{ question.label }}</mat-label><br>
+    <mat-radio-group formControlName="{{ question.key }}">
+      <mat-radio-button *ngFor="let opt of question.options"  [value]="opt.key">{{opt.value}}</mat-radio-button>
+    </mat-radio-group>
+  </div> 
+
+    
+
+</div>
+</form>

@@ -7,9 +7,13 @@
     <mat-icon>input</mat-icon>
     <span class="nav-caption">Login</span>
   </a>
-  <a mat-list-item routerLink="/training" (click)="onClose()" *ngIf="isAuth">
+  <a mat-list-item routerLink="/quizes" (click)="onClose()" *ngIf="isAuth">
     <mat-icon>fitness_center</mat-icon>
-    <span class="nav-caption">Training</span>
+    <span class="nav-caption">Skin Tests</span>
+  </a>
+  <a mat-list-item routerLink="/skin-routine" (click)="onClose()" *ngIf="isAuth">
+    <mat-icon>fitness_center</mat-icon>
+    <span class="nav-caption">Routine</span>
   </a>
   <mat-list-item>
     <button mat-icon-button (click)="onLogout()" *ngIf="isAuth">

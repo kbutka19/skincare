@@ -1,0 +1,45 @@
+<mat-card>
+  <div style="margin-left: 10px">
+    <div
+      class="d-flex"
+      style="justify-content: space-between; flex-direction: row"
+    >
+      <div>
+        <h4>SkinCare Finder</h4>
+        <h6 class="mb-4">
+          Let's find just what your skin needs to look and feel its best!
+        </h6>
+      </div>
+      <div *ngIf="isSubmmited">
+
+        <mat-form-field class="mb-2">
+          <mat-label>Sort by</mat-label>
+          <mat-select [(ngModel)]="sortBy" (change)="changeSort()">
+            <mat-option value="title-asc" class="mr-3">Title (A to Z)</mat-option>
+            <mat-option value="title-dsc" class="mr-3">Title (Z to A)</mat-option>
+            <mat-option value="price-asc" class="mr-3">Price (Low to high)</mat-option>
+            <mat-option value="price-dsc" class="mr-3">Price (High to low)</mat-option>
+
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="mb-2">
+          <mat-label>Currency</mat-label>
+          <mat-select [(ngModel)]="currencyForm">
+            <mat-option value="EUR" class="mr-3">EUR</mat-option>
+            <mat-option value="USD" class="mr-3">USD</mat-option>
+            <mat-option value="ALL" class="mr-3">ALL</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+    </div>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <app-dynamic-form
+      [questions]="questions$ | async"
+      (isSubmmited)="onSubmitClicked()"
+      *ngIf="!isSubmmited"
+    ></app-dynamic-form>
+    <app-results *ngIf="isSubmmited" [currency] = "currencyForm" [column]="column[0]" [order]="column[1]"></app-results>
+  </div>
+</mat-card>

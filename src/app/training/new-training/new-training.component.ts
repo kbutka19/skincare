@@ -18,7 +18,7 @@ export class NewTrainingComponent implements OnInit, OnDestroy {
   private exerciseSubscription: Subscription;
   private loadingSubscription: Subscription;
 
-  constructor(private trainingService: TrainingService, private uiService: UIService) {}
+  constructor(private trainingService: TrainingService, private uiService: UIService) { }
 
   ngOnInit() {
     this.loadingSubscription = this.uiService.loadingStateChanged.subscribe(
@@ -32,6 +32,10 @@ export class NewTrainingComponent implements OnInit, OnDestroy {
       }
     );
     this.fetchExercises();
+  }
+
+  getProducts() {
+    return [{ name: 'Kayak', category: 'Watersports', price: 200 }, { name: 'LifeJacket', category: 'Watersports', price: 200 },]
   }
 
   fetchExercises() {

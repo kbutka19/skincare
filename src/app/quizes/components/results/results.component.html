@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-sm-4 mb-2" *ngFor="let product of quizResults | sortBy:order:column">
+    <mat-card hoverCard class="mb-3" style="cursor:pointer">
+      <img alt="product" [src]="'../../../assets/' + product.src" height="300px" width="300px">
+     <p><strong>{{product.title}}</strong></p>
+     <p>{{product.description | truncate:40}}</p>
+     <p><strong>{{ product.price | convertCurrency:currency}}</strong> 
+      <span *ngIf="product.discounted"> get it for<span style="color:red"> 
+        {{product.discounted| convertCurrency:currency}} (5% Off)</span> </span> </p>
+    </mat-card>
+  </div>
+</div>
+

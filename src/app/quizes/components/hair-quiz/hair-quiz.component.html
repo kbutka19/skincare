@@ -1,0 +1,8 @@
+<mat-card>
+  <div style="margin-left: 10px">
+    <h4>HairCare Finder</h4>
+    <h6 class="mb-4">Tell us your hair struggles, we'll find so-right-solutions!</h6>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <app-dynamic-form  [questions]="questions$ | async" [type]="'hair'"></app-dynamic-form>
+  </div>
+  </mat-card>

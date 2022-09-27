@@ -11,6 +11,7 @@ import { StopTrainingComponent } from './current-training/stop-training.componen
 import { MaterialModule } from '../material.module';
 import { SharedModule } from '../shared/shared.module';
 import { TrainingRoutingModule } from './training-routing.module';
+import { PaAttrDirective } from '../shared/directive/pa-attr.directive';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { TrainingRoutingModule } from './training-routing.module';
     CurrentTrainingComponent,
     NewTrainingComponent,
     PastTrainingsComponent,
-    StopTrainingComponent
+    StopTrainingComponent,
+    PaAttrDirective
   ],
   imports: [
     SharedModule,
@@ -26,4 +28,4 @@ import { TrainingRoutingModule } from './training-routing.module';
   ],
   entryComponents: [StopTrainingComponent]
 })
-export class TrainingModule {}
+export class TrainingModule { }

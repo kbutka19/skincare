@@ -1,5 +1,5 @@
 <section class="new-training" fxLayout fxLayoutAlign="center">
-  <form (ngSubmit)="onStartTraining(f)" #f="ngForm">
+  <!-- <form (ngSubmit)="onStartTraining(f)" #f="ngForm">
     <mat-card fxFlex.xs="100%" fxFlex="400px">
       <mat-card-title fxLayoutAlign="center">Time to start a workout!</mat-card-title>
       <mat-card-content fxLayoutAlign="center">
@@ -17,5 +17,29 @@
         <button *ngIf="!exercises" type="button" mat-button (click)="fetchExercises()">Fetch Again</button>
       </mat-card-actions>
     </mat-card>
-  </form>
+  </form> -->
+
+
+
+
+<div class="col-6">
+    <div class="form-group bg-info text-white p-2">
+      <label>Name:</label>
+      <input class="bg-primary text-white" />
+    </div>
+    <table class="table table-sm table-bordered table-striped">
+        <tr><th></th><th>Name</th><th>Category</th><th>Price</th></tr>
+        <tr *ngFor="let item of getProducts(); let i = index"
+                [pa-attr]="getProducts().length < 6 ? 'bg-success' : 'bg-warning'"
+                [pa-product]="item" (pa-category)="newProduct.category=$event">
+            <td>{{i + 1}}</td>
+            <td>{{item.name}}</td>
+            <td [pa-attr]="item.category == 'Soccer' ? 'bg-info' : null">
+                {{item.category}}
+            </td>
+            <td [pa-attr]="'bg-info'">{{item.price}}</td>
+        </tr>
+    </table>
+</div>
+
 </section>

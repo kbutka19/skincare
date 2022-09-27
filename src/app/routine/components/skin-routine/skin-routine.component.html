@@ -1,0 +1,90 @@
+<mat-card style="box-shadow:none">
+  <h4>Your personal skin routine</h4>
+  <h6>Let's try to improve your skincare routine by filling out what you already use!</h6>
+  <br>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+
+  <div class="mt-3 mb-4" *ngIf="form && form.get('routineList')?.errors?.required">
+  <mat-error>Please add at least one routine step</mat-error>
+</div> 
+
+<div class="mt-3 mb-4" *ngIf="form && form.get('routineList')?.errors?.hasDuplicateSteps">
+  <mat-error>Please add unique step numbers</mat-error>
+</div>
+<div class = "col-sm-8" *ngIf="!isLoading">
+<mat-accordion *ngFor="let formGroup of routineList?.controls; let i = index" class="mb-2">
+  <mat-expansion-panel [expanded]="formGroup.get('id').value">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{formGroup.get('type')?.value && formGroup.get('step')?.value ? 'Step ' + formGroup.get('step').value + ': ' + formGroup.get('type').value : 'New routine step' }}
+      </mat-panel-title>
+     
+    </mat-expansion-panel-header>
+   <form>
+    <mat-form-field>
+      <mat-label> Routine Step</mat-label>
+      <input
+        type="number"
+        matInput
+        [formControl]="formGroup.get('step')"
+      />
+      <mat-error *ngIf="formGroup.get('step')?.errors?.required">Routine Step is required</mat-error> 
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Product Type</mat-label>
+      <mat-select  [formControl]="formGroup.get('type')">
+        <mat-option *ngFor="let opt of productType" [value]="opt.key">
+          {{opt.value}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="formGroup.get('type')?.errors?.required">Product type is required</mat-error>
+    </mat-form-field> 
+
+    <mat-form-field>
+      <mat-label>Product Brand</mat-label>
+      <input
+        type="text"
+        matInput
+        [formControl]="formGroup.get('brand')"
+      />
+      <mat-error *ngIf="formGroup.get('brand')?.errors?.brandNotFound">{{formGroup.get('brand')?.errors?.brandNotFound}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Time of application</mat-label>
+      <mat-select  [formControl]="formGroup.get('application')">
+        <mat-option value="morning"> Morning </mat-option>
+        <mat-option value="morning"> Night </mat-option>
+      </mat-select>
+    </mat-form-field> 
+   </form>
+
+   <mat-form-field>
+    <mat-label>Date of purchase</mat-label>
+    <input matInput [matDatepicker]="picker"  [formControl]="formGroup.get('purchaseDate')">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-error *ngIf="formGroup.get('purchaseDate')?.errors?.dateIsAfter">{{formGroup.get('purchaseDate')?.errors?.dateIsAfter}}</mat-error>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  
+  </mat-expansion-panel>
+
+  <mat-action-row>
+    <button class="btn btn-sm btn-outline-danger" (click)="remove(i)"> Remove</button>
+  </mat-action-row>
+</mat-accordion>
+<br>
+
+
+<button (click)="addRoutine()" class="btn btn-sm btn-light"><i class="fa fa-plus"></i>Add routine step</button>
+<button (click)="deleteAll()" class="btn btn-sm btn-light"> <i class="fa fa-trash"></i>Remove All</button>
+
+<br><br>
+
+<div class="text-center">
+<button class="btn btn-md btn-success" (click)="saveRoutine()" [disabled]= "form.invalid">Save</button>
+</div>
+</div>
+</mat-card>
